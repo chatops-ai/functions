@@ -1,0 +1,16 @@
+service: sls-go-slack
+package:
+  artifact: package.zip
+provider:
+  name: aws
+  runtime: python2.7
+  stage: ${env:ENV}
+  region: ${env:AWS_REGION}
+functions:
+  hello:
+    handler: handler.Handler
+    events:
+      - http:
+          path: query
+          method: post
+          cors: true
